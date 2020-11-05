@@ -14,8 +14,7 @@ class TextFormatter {
 
   public static void main(String[] args) {
     TextFormatter formatter = new TextFormatter(30);
-  int length = formatter.maxLength;
-    formatter.print(text, length);
+    formatter.print(text);
     
   }
 
@@ -26,16 +25,20 @@ class TextFormatter {
 
 
   // Ausgabe
-  public void print(String aText, int length ) {
-     String formattedString = "";
-
-    for (int currentPosition = 0; currentPosition < aText.length(); currentPosition++){
-      if (currentPosition % length == 0){
-        formattedString += "\n";
+  public void print(String aText) {
+    String[] words = aText.split(" ");
+    int characterCounter = 0;
+	  for(int i = 0; i < words.length; i++) {
+      int wordLength = words[i].length();
+	    if(characterCounter + wordLength <= maxLength) {
+	      characterCounter += wordLength + 1;
+	    	System.out.print(words[i] + " ");
+	    }else{
+	    	System.out.print("\n" + words[i] + " ");
+        characterCounter = wordLength + 1;
       }
-      formattedString += aText.charAt(currentPosition); 
     }
-    System.out.println(formattedString);    
+      System.out.println();
   }
 
 }
